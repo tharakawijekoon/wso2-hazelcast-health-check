@@ -20,7 +20,7 @@ The health check API and this health checker can be enabled by adding the follow
 enable= true
 
 [[health_checker]]
-name = "ComponentHealthChecker"
+name = "HazelcastHealthChecker"
 order="87"
 ```
 ## Testing
@@ -36,32 +36,15 @@ curl -k -v https://localhost:9443/api/health-check/v1.0/health
 Response :
 ```
 {
-   "health":[
-      {
-         "key":"jdbc/WSO2CarbonDB.active.connection.count",
-         "value":"1"
-      },
-      {
-         "key":"component.status",
-         "value":"ACTIVE"
-      },
-      {
-         "key":"jdbc/WSO2CarbonDB.connectivity.time.ms",
-         "value":"34"
-      }
-   ]
-}
-```
-Incase of a component failure, the health api would return a HTTP Status Code 503 with the following error.
-
-```
-{
-   "errors":[
-      {
-         "code":"500",
-         "message":"Components have not started, A server Restart and DB check required.",
-         "description":null
-      }
-   ]
+    "health": [
+        {
+            "key": "cluster.status",
+            "value": "ACTIVE"
+        },
+        {
+            "key": "cluster.members",
+            "value": "2"
+        }
+    ]
 }
 ```
